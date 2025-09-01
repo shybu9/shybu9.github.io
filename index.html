@@ -262,12 +262,49 @@
                 categoryDiv.className = 'mb-6';
                 let skillsHTML = `<h3 class="text-xl font-semibold text-white mb-3">${category}</h3><div class="flex flex-wrap gap-2">`;
                 skillsData[category].forEach(skill => {
-                    skillsHTML += `<span class="skill-tag bg-slate-200 text-slate-700 text-sm font-medium px-3 py-1 rounded-full cursor-default">${skill}</span>`;
+                    // Add data-category and data-skill attributes for interactivity
+                    skillsHTML += `<span class="skill-tag bg-slate-200 text-slate-700 text-sm font-medium px-3 py-1 rounded-full cursor-pointer" data-category="${category}" data-skill="${skill}">${skill}</span>`;
                 });
                 skillsHTML += `</div>`;
                 categoryDiv.innerHTML = skillsHTML;
                 skillsListContainer.appendChild(categoryDiv);
             });
+
+            // Skill-to-chart mapping (example values, adjust as needed)
+            const skillChartMap = {
+                'SCA':        [90, 60, 70, 80, 75],
+                'Semgrep':    [95, 65, 75, 85, 80],
+                'CI/CD Pipelines': [85, 55, 60, 90, 70],
+                'Kubernetes': [80, 50, 65, 85, 65],
+                'Jenkins':    [80, 45, 60, 85, 60],
+                'IaC':        [88, 50, 65, 80, 70],
+                'Reachability & Taint Analysis': [92, 70, 80, 75, 85],
+                'Secure Code Review': [90, 75, 85, 70, 90],
+                'VAPT':       [60, 95, 90, 70, 80],
+                'Active Directory Pentesting': [55, 98, 92, 65, 75],
+                'OVAL':       [80, 70, 75, 80, 85],
+                'Splunk (SIEM)': [75, 60, 65, 80, 90],
+                'Rita & Zeek': [70, 65, 70, 85, 80],
+                'Network & Web App Pentesting (OWASP Top 10)': [65, 95, 90, 75, 80],
+                'Virtualization & Containerization': [80, 60, 70, 85, 75],
+                'Python':     [80, 70, 75, 95, 80],
+                'C':          [70, 60, 65, 90, 75],
+                'Bash':       [75, 65, 70, 90, 80],
+                'HTML':       [60, 50, 55, 85, 70],
+                'CSS':        [60, 50, 55, 85, 70],
+                'Java (Beginner)': [50, 40, 45, 70, 60],
+                'JS (Beginner)':   [50, 40, 45, 70, 60],
+                'Time Management': [60, 50, 55, 60, 95],
+                'Report Writing':  [65, 55, 60, 65, 90],
+                'Logical Thinking': [80, 80, 80, 80, 80],
+                'Adaptability':    [70, 70, 70, 70, 90],
+                'Negotiation Skills': [60, 50, 55, 60, 95]
+            };
+
+            const defaultChartData = {
+                label: 'Skill Area Focus',
+                data: [85, 90, 80, 75, 85]
+            };
 
             const ctx = document.getElementById('skillsChart').getContext('2d');
             const skillsChart = new Chart(ctx, {
@@ -275,8 +312,8 @@
                 data: {
                     labels: ['DevSecOps', 'Offensive Security', 'Pentesting', 'Tooling & Automation', 'Analysis & Reporting'],
                     datasets: [{
-                        label: 'Skill Area Focus',
-                        data: [85, 90, 80, 75, 85],
+                        label: defaultChartData.label,
+                        data: defaultChartData.data,
                         backgroundColor: 'rgba(245, 158, 11, 0.2)',
                         borderColor: 'rgba(245, 158, 11, 1)',
                         borderWidth: 2,
@@ -314,11 +351,26 @@
                     plugins: {
                         legend: {
                             position: 'top',
-                             labels: {
+                            labels: {
                                 color: '#334155' // slate-700
                             }
                         }
                     }
+                }
+            });
+
+            // Add interactivity: update chart on skill-tag click
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('skill-tag')) {
+                    const skill = e.target.getAttribute('data-skill');
+                    const chartData = skillChartMap[skill] || defaultChartData.data;
+                    skillsChart.data.datasets[0].data = chartData;
+                    skillsChart.data.datasets[0].label = skill;
+                    skillsChart.update();
+
+                    // Optional: highlight selected skill
+                    document.querySelectorAll('.skill-tag').forEach(tag => tag.classList.remove('bg-green-500', 'text-black'));
+                    e.target.classList.add('bg-green-500', 'text-black');
                 }
             });
 
