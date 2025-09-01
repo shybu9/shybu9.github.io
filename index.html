@@ -9,15 +9,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Chosen Palette: Slate Gray & green -->
-    <!-- Application Structure Plan: A single-page application with a sticky top navigation bar for seamless scrolling between thematic sections (About, Experience, Skills, Projects, etc.). This structure was chosen to provide a fluid, exploratory user experience, allowing visitors like recruiters to quickly access the most relevant information. Key interactions include an interactive timeline for work experience, where details are revealed on click, and a skills radar chart for a quick visual summary of capabilities. This is more engaging than a static list and better highlights the candidate's strengths. -->
-    <!-- Visualization & Content Choices: 
-        - Hero Section (Inform): Large, impactful text to immediately establish identity and expertise.
-        - Experience (Show Change): An interactive vertical timeline (HTML/CSS/JS) to showcase career progression. Users click to expand details, making the section clean and user-driven.
-        - Skills (Organize/Compare): A Chart.js radar chart is used to provide a high-level, visually compelling overview of core competency areas. This is paired with a grid of specific skills for detail. This choice makes a dense list of skills digestible and memorable.
-        - Projects & Achievements (Organize/Inform): A card-based layout (HTML/Tailwind) is used to present projects and accomplishments. This modular format is responsive and easy to scan.
-        - The goal is to transform the resume's flat text into a multi-layered, interactive narrative. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -199,9 +190,9 @@
                     company: 'Loginsoft Pvt. Ltd',
                     date: 'March 2024 - Present',
                     details: [
-                        'Authored Semgrep reachability rules by analyzing open-source SCA data, contributing to secure and efficient DevSecOps workflows.',
-                        'Assessed CIS compliance benchmarks across multiple platforms using CIS-CAT and OVAL engines, reinforcing configuration security standards.',
-                        'Streamlined vulnerability management by automating OVAL-based XML scripting for detection, accelerating the vulnerability research and rule creation process.'
+                        'Authored <b>Semgrep</b> reachability rules by analyzing open-source <b>SCA</b> data, contributing to secure and efficient <b>DevSecOps</b> workflows.',
+                        'Assessed <b>CIS compliance benchmarks</b> across multiple platforms using CIS-CAT and OVAL engines, reinforcing configuration security standards.',
+                        'Streamlined vulnerability management by automating <b>OVAL-based XML</b> scripting for detection, accelerating the vulnerability research and rule creation process.'
                     ]
                 },
                 {
@@ -260,7 +251,7 @@
             
             const skillsData = {
                 'DevSecOps': ['SCA', 'Semgrep', 'CI/CD Pipelines', 'Kubernetes', 'Jenkins', 'IaC', 'Reachability & Taint Analysis', 'Secure Code Review'],
-                'Information Security': ['VAPT', 'Active Directory Pentesting', 'Splunk (SIEM)', 'Rita & Zeek', 'Network & Web App Pentesting (OWASP Top 10)', 'Virtualization & Containerization'],
+                'Information Security': ['VAPT', 'Active Directory Pentesting','OVAL', 'Splunk (SIEM)', 'Rita & Zeek', 'Network & Web App Pentesting (OWASP Top 10)', 'Virtualization & Containerization'],
                 'Programming': ['Python', 'C', 'Bash', 'HTML', 'CSS', 'Java (Beginner)', 'JS (Beginner)'],
                 'Soft Skills': ['Time Management', 'Report Writing', 'Logical Thinking', 'Adaptability', 'Negotiation Skills']
             };
@@ -336,7 +327,7 @@
                     type: 'Technical Project',
                     title: 'Python-Based Cybersecurity Simulation Tools',
                     description: 'A collection of tools including a multi-threaded port scanner (PortScanner) and a domain/IP reconnaissance tool using Shodan (domaINFO).',
-                    link: '#'
+                    link: 'https://github.com/shybu9?tab=repositories'
                 },
                 {
                     type: 'Academic Project',
@@ -358,7 +349,9 @@
                 card.className = 'card bg-black p-6 rounded-lg shadow-md border border-slate-200';
                 card.innerHTML = `
                     <p class="text-sm font-semibold text-green-600 mb-1">${project.type}</p>
-                    <h3 class="text-xl font-bold text-white mb-2">${project.title}</h3>
+                    <h3 class="text-xl font-bold text-white mb-2">${project.title}>
+                        <a href="${project.link}" target="_blank" class="hover:underline">${project.title}</a>
+                    </h3>
                     <p class="text-slate-200">${project.description}</p>
                 `;
                 projectsContainer.appendChild(card);
@@ -366,29 +359,27 @@
             
            const achievementsData = [
     {
+        title: 'Certified Ethical Hacker ( ID: ECC2051647983 )',
+        description: 'Earned the CEH (v12) Practical certification from EC-Council, valid until September 2026.',
+        link: 'https://aspen.eccouncil.org/VerifyBadge?certification_id=ECC2051647983'
+    },
+    {
         title: 'AD Pentesting Seminar',
         description: 'Delivered a seminar on Active Directory Pentesting, discussing common vulnerabilities and mitigation strategies.',
-        link: 'https://www.linkedin.com/posts/shiva-kumar-156450255_active-directory-pentesting-activity-7097395928602923008-3gfE/'
+        link: 'https://www.linkedin.com/posts/shiva-kumar-156450255_thm-thehackersmeetup-thehackersmeetuphyd-activity-7180213771070529536-YKse/?utm_source=share&utm_medium=member_desktop&rcm=ACoAADb9NWAB2sgOMgD2dV3N2pXOoeSrlO7GVHg'
     },
     {
         title: 'Top 1% on TryHackMe',
         description: 'Extensive hands-on experience with offensive security labs across TryHackMe, HTB, PortSwigger, and VulnHub.',
-        link: 'https://tryhackme.com/p/shybu9'
+        link: 'https://tryhackme.com/p/shyBUG'
     },
     {
         title: 'CTF Top Rankings',
         description: 'Participated and achieved top-ranking positions in numerous National Level CTF Events like NULL Hyderabad, E-HACK, and AUMCTF.',
-        link: 'https://www.linkedin.com/posts/shiva-kumar-156450255_ctf-buff3rctf-infosec-activity-7094041519140792320-jOLf/'
     },
     {
         title: 'CTF Event Conductor',
         description: 'Conducted a CTF event by deploying a Dockerized web app in a cloud environment and authored multiple write-ups.',
-        link: 'https://shybu9.github.io/#writeups'
-    },
-    {
-        title: 'Certified Ethical Hacker',
-        description: 'Earned the CEH (v12) Practical certification from EC-Council, valid until September 2026.',
-        link: 'https://aspen.eccouncil.org/VerifyBadge?certification_id=ECC2051647983'
     },
     {
         title: 'Virtual Experience Programs',
